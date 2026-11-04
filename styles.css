@@ -1,0 +1,142 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Oswald", "Manrope", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ivory: var(--ivory);
+  --color-beige: var(--beige);
+  --color-stone: var(--stone);
+  --color-coal: var(--coal);
+  --color-abyss: var(--abyss);
+}
+
+:root {
+  --radius: 0.125rem;
+  --abyss: oklch(0.12 0 0);        /* #080808 */
+  --coal: oklch(0.18 0 0);         /* #111111 */
+  --ivory: oklch(0.951 0.011 84);  /* #F3EFE7 */
+  --beige: oklch(0.78 0.035 80);   /* #C8B99F */
+  --stone: oklch(0.55 0.008 75);   /* #77736D */
+
+  --background: var(--abyss);
+  --foreground: var(--ivory);
+  --card: var(--coal);
+  --card-foreground: var(--ivory);
+  --popover: var(--coal);
+  --popover-foreground: var(--ivory);
+  --primary: var(--beige);
+  --primary-foreground: var(--abyss);
+  --secondary: var(--coal);
+  --secondary-foreground: var(--ivory);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.68 0.01 80);
+  --accent: var(--beige);
+  --accent-foreground: var(--abyss);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: var(--ivory);
+  --border: oklch(0.951 0.011 84 / 12%);
+  --input: oklch(0.951 0.011 84 / 18%);
+  --ring: var(--beige);
+
+  --gradient-hero: linear-gradient(180deg, oklch(0.12 0 0 / 0.55) 0%, oklch(0.12 0 0 / 0.35) 40%, oklch(0.12 0 0 / 0.95) 100%);
+  --gradient-side: linear-gradient(90deg, oklch(0.12 0 0 / 0.85) 0%, oklch(0.12 0 0 / 0.1) 70%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--beige); color: var(--abyss); }
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--beige);
+}
+
+@utility headline {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+@utility bg-hero-overlay { background: var(--gradient-hero); }
+@utility bg-side-overlay { background: var(--gradient-side); }
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@utility btn-solid {
+  background: var(--beige);
+  color: var(--abyss);
+  &:hover { background: var(--ivory); letter-spacing: 0.26em; }
+}
+
+@utility btn-outline {
+  border: 1px solid oklch(0.951 0.011 84 / 40%);
+  color: var(--ivory);
+  &:hover { border-color: var(--beige); color: var(--beige); }
+}
+
+@utility link-line {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    height: 1px; width: 100%;
+    background: var(--beige);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+  }
+  &:hover::after { transform: scaleX(1); transform-origin: left; }
+}
